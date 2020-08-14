@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        margin: 0;
+    }
+    #demo {
+        width: 100px;
+        height: 100px;
+        background: red;
+        position: relative;
+    }
+</style>
+
+<body>
+    <div id="demo"></div>
+    <script>
+        var demo = document.getElementById("demo");
+        // 在demo标签内按下才会触发
+        demo.onmousedown = function(){
+            console.log("鼠标按下了",demo);
+            // 移动鼠标的时候盒子跟随移动
+            document.onmousemove = function(event){
+                console.log('鼠标移动了',event)
+                
+                demo.style.top = event.clientY - demo.offsetHeight/2 + "px";
+                demo.style.left = event.clientX - demo.offsetWidth/2 + "px";
+            }
+        }
+        // 鼠标松开的时候，盒子停止移动
+        document.onmouseup = function(){
+            console.log("鼠标松开了")
+            document.onmousemove = null;
+        }
+    </script>
+</body>
+
+</html>
